@@ -1,0 +1,28 @@
+# Maintainer: KycKyc <kyckyc@42bytes.team>
+pkgname=wfm-app
+pkgver=0.0.3
+pkgrel=1
+pkgdesc="Wfm desktop application"
+arch=('x86_64')
+url="warframe.market"
+license=('GPL')
+provides=("${pkgname}")
+conflicts=("${pkgname}")
+source=("${pkgname}_${pkgver}_amd64.deb")
+md5sums=(SKIP)
+
+prepare() {
+	rm -f ${pkgname}_${pkgver}_amd64.deb
+	rm debian-binary
+	tar -xf data.tar.xz ./usr 
+	rm data.tar.xz
+	rm control.tar.xz
+}
+
+package() {
+	pwd
+	echo "installing to ${pkgdir}"
+	echo "installing from ${srcdir}"
+	cp -rp "${srcdir}/usr" "${pkgdir}"
+	rm -rf "${pkgdir}/usr/share/lintian"
+}

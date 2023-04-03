@@ -1,0 +1,15 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100px;
+  padding: 10px 15px;
+  background-color: #f5f5f5;
+  > button {
+    margin: 10px 0;
+  }
+}
+
+.whatever {
+}

@@ -1,0 +1,3 @@
+#Files to not make eslint parse
+build/*
+workers/*
