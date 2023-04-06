@@ -1,6 +1,6 @@
 # Maintainer: KycKyc <kyckyc@42bytes.team>
 pkgname=wfm-app
-pkgver=0.0.3
+pkgver=0.1.1
 pkgrel=1
 pkgdesc="Wfm desktop application"
 arch=('x86_64')

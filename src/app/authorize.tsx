@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import styles from './authorize.module.scss';
 
 export const Authorize = () => {
     const [processing, setProcessing] = useState(false);
@@ -26,12 +27,12 @@ export const Authorize = () => {
         <div>
             {processing && <span>Waiting response from the site...</span>}
             {!processing && (
-                <>
+                <section className={styles.authorize}>
                     <label htmlFor='name'>Authorize through warframe.market</label>
                     <button id='name' onClick={authorize}>
                         Authorize
                     </button>
-                </>
+                </section>
             )}
         </div>
     );

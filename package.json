@@ -1,11 +1,12 @@
 {
   "name": "wfm-app",
   "productName": "wfm-app",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "My Electron application description",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",
+    "local": "electron-forge start -- --local",
     "debug": "electron-forge start --inspect-electron --vscode",
     "package": "electron-forge package",
     "make": "electron-forge make",

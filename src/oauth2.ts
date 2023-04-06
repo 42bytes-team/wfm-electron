@@ -34,6 +34,8 @@ export interface Response<T> {
 }
 
 class OAuthBuilder {
+    authorizeURL: string = 'https://warframe.market/auth/authorize';
+    apiURL: string = 'https://api.warframe.market/v2';
     challenge: string;
     codeVerifier: string;
     state: string;
@@ -41,6 +43,12 @@ class OAuthBuilder {
     tokens: OauthTokens;
 
     constructor(credentials: OauthCredentials, tokens: OauthTokens) {
+        if (process.argv.includes('--local')) {
+            console.debug('local development mode');
+            this.authorizeURL = 'http://warframe.test/auth/authorize';
+            this.apiURL = 'http://api.warframe.test/v2';
+        }
+
         this.challenge = '';
         this.codeVerifier = '';
         this.state = '';
@@ -71,7 +79,7 @@ class OAuthBuilder {
             device_id: this.credentials.device_id,
         });
 
-        const url = `https://warframe.market/auth/authorize?${searchParams.toString()}`;
+        const url = `${this.authorizeURL}?${searchParams.toString()}`;
         shell.openExternal(url);
     }
 
@@ -94,7 +102,7 @@ class OAuthBuilder {
             code_verifier: this.codeVerifier,
         };
 
-        return fetch('http://api.warframe.market/v2/oauth/token', {
+        return fetch(`${this.apiURL}/oauth/token`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -136,7 +144,7 @@ class OAuthBuilder {
      */
     async getCurrentUser(): Promise<CurrentUser | null> {
         if (this.tokens.accessToken == null) return null;
-        return fetch('http://api.warframe.market/v2/me', {
+        return fetch(`${this.apiURL}/me`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
